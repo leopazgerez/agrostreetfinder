@@ -1,7 +1,6 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-import '../../models/point_model.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({Key? key}) : super(key: key);
@@ -11,19 +10,38 @@ class MapScreen extends StatefulWidget {
 }
 
 class _MapScreenState extends State<MapScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  void _openDrawer() {
+    _scaffoldKey.currentState!.openDrawer();
+  }
+
+  void _closeDrawer() {
+    Navigator.of(context).pop();
+  }
+
 //Trabaja con latitud y longitud
   final _initialCameraPosition = const CameraPosition(
     target: LatLng(-25.4401187, -63.8570852),
     zoom: 15,
   );
+
   // final point = PointModel();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      key: _scaffoldKey,
+      appBar: AppBar(
+        centerTitle: true,
+        title: const Text('Home'),
+        leading: IconButton(
+          onPressed: _openDrawer,
+          iconSize: 30,
+          icon: const Icon(Icons.list),),
+      ),
       //El widget de Maps solo debe ir dentro de widget con las dimensiones definidas
-      //Puede ir dentro de un container, sizeBox o directamente Body de scaffold.
+      // Puede ir dentro de un container, sizeBox o directamente Body de scaffold.
       body: GoogleMap(
         initialCameraPosition: _initialCameraPosition,
         mapType: MapType.hybrid,
@@ -33,6 +51,17 @@ class _MapScreenState extends State<MapScreen> {
         myLocationEnabled: true,
         myLocationButtonEnabled: true,
       ),
+      drawer: Drawer(
+        child: AppBar(
+            centerTitle: true,
+            title: const Text('Menu'),
+            leading: IconButton(
+                onPressed: _closeDrawer,
+                iconSize: 30,
+                icon: const Icon(Icons.arrow_back_rounded))
+        ),
+      ),
     );
   }
 }
+
