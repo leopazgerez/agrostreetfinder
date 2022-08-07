@@ -15,7 +15,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const MapScreen(),
+      home: const DefaultTabController(
+      length: 3,
+      child: MapScreen(),
+      ),
     );
   }
 }

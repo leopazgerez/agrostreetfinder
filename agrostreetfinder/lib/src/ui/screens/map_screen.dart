@@ -1,4 +1,3 @@
-import 'package:agrostreetfinder/src/ui/screens/tabs_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -35,18 +34,19 @@ class _MapScreenState extends State<MapScreen> {
       key: _scaffoldKey,
       appBar: AppBar(
         bottom: const TabBar(
-          tabs:
-          <Widget>[
-        Tab(
-        icon: Icon(Icons.cloud_outlined),
-      ),
-      Tab(
-        icon: Icon(Icons.beach_access_sharp),
-      ),
-      Tab(
-        icon: Icon(Icons.brightness_5_sharp),
-      ),
-      ],
+         indicatorColor: Color(0xFFC8E6C9),
+        tabs: ( <Widget>
+        [
+            Tab(
+                icon: Icon(Icons.place_outlined)),
+          Tab(
+            icon: Icon(Icons.route_outlined),
+          ),
+          Tab(
+            icon: Icon(Icons.star_border),
+          ),
+          ]
+        ),
         ),
         centerTitle: true,
         title: const Text('Home'),
@@ -65,6 +65,7 @@ class _MapScreenState extends State<MapScreen> {
 
         myLocationEnabled: true,
         myLocationButtonEnabled: true,
+        zoomControlsEnabled: false,
       ),
       drawer: Drawer(
         child: AppBar(
@@ -76,7 +77,7 @@ class _MapScreenState extends State<MapScreen> {
                 icon: const Icon(Icons.arrow_back_rounded))
         ),
       ),
-    );
+   );
   }
 }
 
