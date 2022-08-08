@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoadTrackScreen extends StatefulWidget{
-  String? nameField;
-  String? nameField1;
-  String? nameField2;
-  String? nameField3;
-  LoadTrackScreen(Key ? key, this.nameField, this.nameField1, this.nameField2, this.nameField3) : super(key:key);
+  const LoadTrackScreen({Key ? key}) : super(key:key);
 
   @override
   State<LoadTrackScreen> createState() => _LoadTrackScreenState();

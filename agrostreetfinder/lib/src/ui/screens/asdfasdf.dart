@@ -1,13 +1,18 @@
-import 'load_track_screen.dart';
+class Tester{
+  var _addresses = <String, int>{};
+  var _numEnt = <int>{};
+  Tester(){}
 
-class Test extends LoadTrackScreen
-{
-  const Test(super.key, super.nameField, super.nameField1, super.nameField2, super.nameField3);
-  @override
-  // TODO: implement nameField
-  String? get nameField => 'hola';
-  @override
-  // TODO: implement nameField1
-  String? get nameField1 => 'lala';
+      addNumEnt(int num){
+    _numEnt.add(num);
+    return _numEnt;
+    }
 
+    void getNumEnt(){
+    print(_numEnt.length);
+    }
 }
+
+
+
+
