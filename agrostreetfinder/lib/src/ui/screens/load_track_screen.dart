@@ -43,7 +43,7 @@ class LoadTrackScreen extends StatefulWidget{
             maxLength: 50,
             textCapitalization: TextCapitalization.words,
               decoration: const InputDecoration(
-              labelText: LoadTrackScreen(nameField: Text('lala')),
+              labelText: 'Name',
                 ),
               )
           ),
