@@ -1,3 +1,4 @@
+import 'package:agrostreetfinder/src/ui/screens/load_field_screen.dart';
 import 'package:agrostreetfinder/src/ui/screens/load_track_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class TestingScreens extends StatelessWidget{
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const LoadTrackScreen(),
+      home: const LoadStreetScreen(),
     );
   }
 }

@@ -67,6 +67,11 @@ class _MapScreenState extends State<MapScreen> {
         myLocationButtonEnabled: true,
         zoomControlsEnabled: false,
       ),
+      floatingActionButton: const FloatingActionButton(
+        tooltip: 'add',
+        onPressed: null,
+        child: Icon(Icons.add),
+      ),
       drawer: Drawer(
         child: AppBar(
             centerTitle: true,

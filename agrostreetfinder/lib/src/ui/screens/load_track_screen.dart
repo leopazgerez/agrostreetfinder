@@ -87,39 +87,3 @@ class LoadTrackScreen extends StatefulWidget{
       ],
     );
   }
-  /*
-Container(
-width: 200,
-alignment: Alignment.center,
-decoration: BoxDecoration(
-border: Border.all(color: Colors.black),
-borderRadius: BorderRadius.circular(5),
-),
-padding:  const EdgeInsets.symmetric(horizontal: 15),
-margin: const EdgeInsets.symmetric(horizontal: 10),
-child: TextFormField(
-decoration: const InputDecoration(
-labelText: 'Description' ,
-),
-)
-),
-],
-
-),
-Column(
-children: [
-Container(
-width: 200,
-alignment: Alignment.center,
-decoration: BoxDecoration(
-border: Border.all(color: Colors.black),
-borderRadius: BorderRadius.circular(5),
-),
-padding:  const EdgeInsets.symmetric(horizontal: 15),
-margin: const EdgeInsets.symmetric(horizontal: 10),
-child: TextFormField(
-decoration: const InputDecoration(
-labelText: 'Description' ,
-),
-)
-),*/

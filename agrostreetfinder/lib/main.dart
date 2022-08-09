@@ -1,17 +1,12 @@
-import 'package:agrostreetfinder/src/ui/screens/asdfasdf.dart';
 import 'package:agrostreetfinder/src/ui/screens/map_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  //runApp(const MyApp());
-
-
-  var p = Tester();
-  p.addNumEnt(3);
-  p.addNumEnt(4);
-  p.getNumEnt();
+  runApp(const MyApp());
 }
-/*class MyApp extends StatelessWidget {
+
+
+  class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
@@ -28,8 +23,4 @@ void main() {
       ),
     );
   }
-}*/
-
-
-
-
+}
