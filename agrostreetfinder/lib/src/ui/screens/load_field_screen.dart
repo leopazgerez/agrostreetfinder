@@ -24,45 +24,46 @@ class _LoadStreetScreenState extends State<LoadStreetScreen>{
 Widget body() {
   return Container(
     padding: const EdgeInsets.symmetric(),
-    child: Column(
-      children: [
-        const SizedBox(
-          height: 10,
-        ),
-        Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.black),
-              borderRadius: BorderRadius.circular(5),
-            ),
-            padding:  const EdgeInsets.symmetric(horizontal: 15),
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            child: TextFormField(
-              maxLength: 50,
-              textCapitalization: TextCapitalization.words,
-              decoration: const InputDecoration(
-                labelText: 'Nombre',
+    child: SingleChildScrollView(
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 10,
+          ),
+          Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.black),
+                borderRadius: BorderRadius.circular(5),
               ),
-            )
-        ),
-        const SizedBox(
-          height: 10,
-        ),
-        Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.black),
-              borderRadius: BorderRadius.circular(5),
+              padding:  const EdgeInsets.symmetric(horizontal: 15),
+              margin: const EdgeInsets.symmetric(horizontal: 10),
+              child: TextFormField(
+                maxLength: 50,
+                textCapitalization: TextCapitalization.words,
+                decoration: const InputDecoration(
+                  labelText: 'Nombre',
+                ),
+              )
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+           Container(
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.black),
+                  borderRadius: BorderRadius.circular(5),
+                ),
+                padding:  const EdgeInsets.symmetric(horizontal: 15),
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                child: TextFormField(
+                  maxLength: 50,
+                  decoration: const InputDecoration(
+                    labelText: 'Hectareas' ,
+                  ),
+                ),
             ),
-            padding:  const EdgeInsets.symmetric(horizontal: 15),
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            child: TextFormField(
-              maxLength: 50,
-              decoration: const InputDecoration(
-                labelText: 'Hectareas' ,
-              ),
-            )
-        ),
         const SizedBox(
           height: 10,
         ),
@@ -123,23 +124,22 @@ Widget body() {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            IconButton(
+            //pasar icon button a elevated u otro que note mejor que es una Botón.
+            ElevatedButton(
                 onPressed: (){},
-                icon: const Icon(
-                  Icons.cancel,
-                  size: 35,)),
+                  child: const Icon(Icons.cancel),
+            ),
             const SizedBox(
               width: 150,
             ),
-            IconButton(
+            ElevatedButton(
                 onPressed: (){},
-                icon: const Icon(
-                  Icons.save,
-                  size: 35,)
+                child: const Icon(Icons.save),
             ),
           ],
         ),
       ],
+    ),
     ),
   );
 }

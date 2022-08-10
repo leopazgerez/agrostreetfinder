@@ -1,6 +1,9 @@
+import 'package:agrostreetfinder/src/ui/screencontrollers/expandable_fab_screen_controller.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
+import '../screencomponent/action_button_screen_component.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({Key? key}) : super(key: key);
@@ -67,11 +70,19 @@ class _MapScreenState extends State<MapScreen> {
         myLocationButtonEnabled: true,
         zoomControlsEnabled: false,
       ),
-      floatingActionButton: const FloatingActionButton(
-        tooltip: 'add',
-        onPressed: null,
-        child: Icon(Icons.add),
-      ),
+      floatingActionButton: const ExpandableFab(
+      distance: 112.0,
+      children:[
+        ActionButton(
+          onPressed: null,
+          icon: Icon(Icons.route_outlined),
+        ),
+        ActionButton(
+          onPressed: null,
+          icon: Icon(Icons.place_outlined),
+        ),
+      ],
+    ),
       drawer: Drawer(
         child: AppBar(
             centerTitle: true,
