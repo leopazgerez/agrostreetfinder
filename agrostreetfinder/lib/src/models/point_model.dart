@@ -1,6 +1,7 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class PointModel {
+    PointModel();
   final Map<MarkerId, Marker> _markers = {};
   //metodos set para setear los marcadores y retornar los valores de los marcadores del mapa
   Set<Marker> get markers => _markers.values.toSet();

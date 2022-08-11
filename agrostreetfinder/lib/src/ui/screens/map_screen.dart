@@ -1,8 +1,10 @@
+import 'package:agrostreetfinder/src/models/lot_model.dart';
+import 'package:agrostreetfinder/src/models/street_model.dart';
 import 'package:agrostreetfinder/src/ui/screencontrollers/expandable_fab_screen_controller.dart';
-import 'package:flutter/gestures.dart';
+import 'package:agrostreetfinder/src/ui/screens/load_field_screen.dart';
+import 'package:agrostreetfinder/src/ui/screens/load_track_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 import '../screencomponent/action_button_screen_component.dart';
 
 class MapScreen extends StatefulWidget {
@@ -41,7 +43,8 @@ class _MapScreenState extends State<MapScreen> {
         tabs: ( <Widget>
         [
             Tab(
-                icon: Icon(Icons.place_outlined)),
+                icon: Icon(Icons.place_outlined)
+            ),
           Tab(
             icon: Icon(Icons.route_outlined),
           ),
@@ -70,30 +73,90 @@ class _MapScreenState extends State<MapScreen> {
         myLocationButtonEnabled: true,
         zoomControlsEnabled: false,
       ),
-      floatingActionButton: const ExpandableFab(
-      distance: 112.0,
+      floatingActionButton: ExpandableFab(
+      distance: 80.0,
       children:[
         ActionButton(
-          onPressed: null,
-          icon: Icon(Icons.route_outlined),
+          onPressed: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const LoadTrackScreen()),
+            );
+          },
+          icon: const Icon(Icons.route_outlined,
+            color: Colors.white,
+          ),
         ),
         ActionButton(
-          onPressed: null,
-          icon: Icon(Icons.place_outlined),
+          onPressed: () {
+            Navigator.push(context,
+              MaterialPageRoute(builder: (context) => const LoadFieldScreen()),
+            );
+          },
+          icon: const Icon(Icons.place_outlined,
+          color: Colors.white,),
         ),
       ],
     ),
       drawer: Drawer(
-        child: AppBar(
-            centerTitle: true,
-            title: const Text('Menu'),
-            leading: IconButton(
-                onPressed: _closeDrawer,
-                iconSize: 30,
-                icon: const Icon(Icons.arrow_back_rounded))
+        child: Column(
+          children: [
+            AppBar(
+                centerTitle: true,
+                title: const Text('Menu'),
+                leading: IconButton(
+                    onPressed: _closeDrawer,
+                    iconSize: 30,
+                    icon: const Icon(Icons.arrow_back_rounded))
+            ),
+            Column(
+              children: [
+                listLots(),
+              ],
+            ),
+            Column(
+              children: [
+                listStreet(),
+              ],
+            ),
+          ],
         ),
       ),
    );
   }
 }
 
+
+
+
+
+
+Widget listLots(){
+List<LotModel> lots = [
+  LotModel(id: 1, name: 'A1'),
+  LotModel(id: 2, name: 'A2'),
+  LotModel(id: 3, name: 'A3')
+];
+  return ListView.builder(
+    // itemCount: lots.length,
+      itemBuilder: (context, index){
+        return Text(lots[index].name);
+      }
+      );
+}
+
+
+
+Widget listStreet(){
+  List<StreetModel> streets = [
+    StreetModel(name: 'Calle 1'),
+    StreetModel(name: 'Calle 2'),
+    StreetModel(name: 'Calle 3'),
+    StreetModel(name: 'Calle 4'),
+  ];
+  return ListView.builder(
+    // itemCount: streets.length,
+      itemBuilder: (context, index){
+      return Text(streets[index].name);
+      }
+      );
+}

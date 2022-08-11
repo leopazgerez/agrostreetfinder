@@ -14,7 +14,7 @@ class FakeItem extends StatelessWidget {
       margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 24.0),
       height: isBig ? 128.0 : 36.0,
       decoration: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+        borderRadius: const BorderRadius.all(Radius.circular(10.0)),
         color: Colors.grey.shade300,
       ),
     );

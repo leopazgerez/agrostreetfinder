@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 
-class LoadStreetScreen extends StatefulWidget{
-  const LoadStreetScreen({Key ? key}) : super(key:key);
+class LoadFieldScreen extends StatefulWidget{
+  const LoadFieldScreen({Key ? key}) : super(key:key);
 
   @override
-  State<LoadStreetScreen> createState() => _LoadStreetScreenState();
+  State<LoadFieldScreen> createState() => _LoadFieldScreenState();
 }
-class _LoadStreetScreenState extends State<LoadStreetScreen>{
+class _LoadFieldScreenState extends State<LoadFieldScreen>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(

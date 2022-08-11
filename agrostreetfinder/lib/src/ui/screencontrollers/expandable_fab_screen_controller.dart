@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
+
 //Coordina la expansion y colapso de otros botones
 class ExpandableFab extends StatefulWidget {
   const ExpandableFab({
@@ -9,6 +10,7 @@ class ExpandableFab extends StatefulWidget {
     required this.distance,
     required this.children,
   });
+
 //Toma como parametros el estado de inicio, la distancia de cada botón
 // y una lista de children donde se van a guardar los botones.
   final bool? initialOpen;
@@ -24,7 +26,7 @@ class ExpandableFab extends StatefulWidget {
     late final Animation<double> _expandAnimation;
     bool _open = false;
 
-    // Metodo abtsracto sobreescrito para que cuando se inicialise se le asigne un widget
+    // Metodo abtsracto sobreescrito para que cuando se inicialice se le asigne un widget
     @override
     void initState() {
       super.initState();
@@ -51,7 +53,7 @@ class ExpandableFab extends StatefulWidget {
     // Metodo que modifica el estado del widget cuando es presionado
     void _toggle() {
       setState(() {
-        _open = !_open;
+        _open = ! _open;
         if (_open) {
           _controller.forward();
         } else {
@@ -77,7 +79,7 @@ class ExpandableFab extends StatefulWidget {
     }
 
 
-// Widget por el que va a cambiar una vez desplegados el icono del widget agregar
+// Widget por el que va a cambiar una vez desplegados los iconos agregados (despues de ser presionado)
     Widget _buildTapToCloseFab() {
       return SizedBox(
         width: 56,
@@ -87,6 +89,7 @@ class ExpandableFab extends StatefulWidget {
             shape: const CircleBorder(),
             clipBehavior: Clip.antiAlias,
             elevation: 4,
+            // clase que expande o reduce el widget
             child: InkWell(
               // mouseCursor: MouseCursor.defer,
               onTap: _toggle,
@@ -102,6 +105,10 @@ class ExpandableFab extends StatefulWidget {
         ),
       );
     }
+
+
+    // lista de widgets que va a recibir la clase ExpandableFab que son los widgets
+    // que se van a desplazar una vez presionado el boton
     List<Widget> _buildExpandingActionButtons() {
       final children = <Widget>[];
       final count = widget.children.length;
@@ -120,7 +127,10 @@ class ExpandableFab extends StatefulWidget {
       }
       return children;
     }
-    // Widget que va mostrar el icono de agregar
+
+
+    // Widget que va mostrar el icono de agregar (antes de ser presionado)
+    // en este widget no va un Inkwell ya que es el primario
     Widget _buildTapToOpenFab() {
       return IgnorePointer(
         ignoring: _open,
@@ -149,6 +159,7 @@ class ExpandableFab extends StatefulWidget {
 
   }
 
+  // clase que se encarga de animar un determinado widget
 class _ExpandingActionButton extends StatelessWidget {
   const _ExpandingActionButton({
     required this.directionInDegrees,
@@ -162,13 +173,16 @@ class _ExpandingActionButton extends StatelessWidget {
   final Animation<double> progress;
   final Widget child;
 
+  // se sobreescribe con los parametros de la aniamcion que se requiere
+  // en este caso es un desplazamiento con rotacion del widget
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: progress,
       builder: (context, child) {
+        // metodo que settea el angulo con el que se van a abrir los iconos
         final offset = Offset.fromDirection(
-          directionInDegrees * (math.pi / 180.0),
+          directionInDegrees * (math.pi / 270.0),
           progress.value * maxDistance,
         );
         return Positioned(
