@@ -98,29 +98,23 @@ class _MapScreenState extends State<MapScreen> {
       ],
     ),
       drawer: Drawer(
-        child: Column(
-          children: [
-            AppBar(
+        child: AppBar(
                 centerTitle: true,
                 title: const Text('Menu'),
                 leading: IconButton(
                     onPressed: _closeDrawer,
                     iconSize: 30,
-                    icon: const Icon(Icons.arrow_back_rounded))
-            ),
-            Column(
-              children: [
-                listLots(),
-              ],
-            ),
-            Column(
-              children: [
-                listStreet(),
-              ],
-            ),
+                    icon: const Icon(Icons.arrow_back_rounded)
+                ),
+          actions: [
+          ListBody(
+            children: [
+              listLots()
+            ],
+          )
           ],
+            ),
         ),
-      ),
    );
   }
 }

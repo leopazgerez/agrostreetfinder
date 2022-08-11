@@ -79,7 +79,9 @@ Widget body() {
               maxLength: 50,
               decoration: const InputDecoration(
                 labelText: 'Tipo de Produccion' ,
+                bo
               ),
+
             )
         ),
         const SizedBox(
