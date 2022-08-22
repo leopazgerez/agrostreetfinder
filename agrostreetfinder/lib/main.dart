@@ -17,10 +17,7 @@ void main() {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const DefaultTabController(
-      length: 3,
-      child: MapScreen(),
-      ),
+      home: const MapScreen(),
     );
   }
 }

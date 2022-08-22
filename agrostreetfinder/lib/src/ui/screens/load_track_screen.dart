@@ -22,70 +22,82 @@ class LoadTrackScreen extends StatefulWidget{
 
 
   Widget body() {
+    final formKey = GlobalKey<FormState>();
+    final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
     return SingleChildScrollView(
-      child: Column(
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          Container(
-            alignment: Alignment.center,
-            decoration: BoxDecoration(
-              border: Border.all(color: Colors.black),
-              borderRadius: BorderRadius.circular(5),
-            ),
-            padding:  const EdgeInsets.symmetric(horizontal: 15),
-            margin: const EdgeInsets.symmetric(horizontal: 10),
-            child: TextFormField(
-              maxLength: 50,
-              textCapitalization: TextCapitalization.words,
-                decoration: const InputDecoration(
-                labelText: 'Name',
-                  ),
-                )
-            ),
-          const SizedBox(
-            height: 10,
-          ),
-          Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.black),
-                borderRadius: BorderRadius.circular(5),
-              ),
-              padding:  const EdgeInsets.symmetric(horizontal: 15),
-              margin: const EdgeInsets.symmetric(horizontal: 10),
-              child: TextFormField(
-                maxLines: 3,
-                maxLength: 100,
-                decoration: const InputDecoration(
-                  labelText: 'Description' ,
-                ),
-              )
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Row(
+      child: Form(
+          key: formKey,
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-             IconButton(
-                  onPressed: (){},
-                  icon: const Icon(
-                    Icons.cancel,
-                    size: 35,)),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: TextFormField(
+                  validator: (value){
+                    if (value == null || value.isEmpty){
+                      return 'Este campo es requerido';
+                    }
+                    return null;
+                  },
+                  textCapitalization: TextCapitalization.words,
+                  decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.all(20),
+                    enabledBorder: OutlineInputBorder(),
+                    border: OutlineInputBorder(),
+                    labelText: 'Nombre',
+                  ),
+                ),
+              ),Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: TextFormField(
+                  textCapitalization: TextCapitalization.words,
+                  decoration: const InputDecoration(
+                    contentPadding: EdgeInsets.all(20),
+                    enabledBorder: OutlineInputBorder(),
+                    border: OutlineInputBorder(),
+                    labelText: 'Descripcion',
+                  ),
+                ),
+              ),
               const SizedBox(
-                width: 150,
+                height: 10,
               ),
-              IconButton(
-                  onPressed: (){},
-                  icon: const Icon(
-                    Icons.save,
-                    size: 35,)
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(right: 20, left: 20),
+                    width: 320,
+                    height: 60,
+                    child: ElevatedButton(
+                        onPressed: (){},
+                        child: const Icon(
+                          Icons.cancel,
+                          size: 45,)),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(left: 20, right: 20),
+                    width: 320,
+                    height: 60,
+                    child: ElevatedButton(
+                        onPressed: (){
+                          if (formKey.currentState!.validate()) {
+                            //En caso de no tener un BuildContext creo una variable
+                            //de tipo GlobalKey y le asigno GlobalKey<ScaffoldMessengerState>()
+                            scaffoldKey.currentState!.showSnackBar(
+                                const SnackBar(content: Text('Guardado'))
+                            );
+                          }
+                        },
+                        child: const Icon(
+                          Icons.save,
+                          size: 45,)
+                    ),
+                  ),
+                ],
               ),
-              ],
+            ],
           ),
-        ],
       ),
     );
   }

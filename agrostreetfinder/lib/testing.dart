@@ -1,7 +1,6 @@
 import 'package:agrostreetfinder/src/models/lot_model.dart';
-import 'package:agrostreetfinder/src/ui/screencomponent/list_screen_component.dart';
+import 'package:agrostreetfinder/src/ui/screencomponent/home_drawer.dart';
 import 'package:agrostreetfinder/src/ui/screens/load_field_screen.dart';
-import 'package:agrostreetfinder/src/ui/screens/load_track_screen.dart';
 import 'package:flutter/material.dart';
 
 void main(){
@@ -12,11 +11,7 @@ class TestingScreens extends StatelessWidget{
 
   @override
   Widget build(BuildContext context)  {
-    List<LotModel> lots = [
-      LotModel(id: 1, name: 'A1'),
-      LotModel(id: 2, name: 'A2'),
-      LotModel(id: 3, name: 'A3')
-    ];
+
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Testing Screen',
@@ -28,9 +23,8 @@ class TestingScreens extends StatelessWidget{
           title: const Text('list'),
           centerTitle: true,
         ),
-        body: ListScreenComponent(items: [lots],),
-      ),
-
+        body: const LoadFieldScreen(),
+        ),
     );
   }
 }
