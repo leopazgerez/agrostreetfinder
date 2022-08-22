@@ -1,6 +1,7 @@
 import 'package:agrostreetfinder/src/models/type_production_agricola_model.dart';
 import 'package:agrostreetfinder/src/models/type_production_agropecuaria_model.dart';
 import 'package:agrostreetfinder/src/models/type_production_pecuario_model.dart';
+import 'package:agrostreetfinder/src/ui/screens/map_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/type_production_model.dart';
@@ -12,6 +13,8 @@ class LoadFieldScreen extends StatefulWidget{
   State<LoadFieldScreen> createState() => _LoadFieldScreenState();
 }
 class _LoadFieldScreenState extends State<LoadFieldScreen>{
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,135 +23,129 @@ class _LoadFieldScreenState extends State<LoadFieldScreen>{
         centerTitle: true,
         title: const Text('Campo'),
       ),
-      body: body(),
+      body: _body(context),
     );
   }
 }
 
-
-Widget body() {
-  final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
+Widget _body(context){
   final formKey = GlobalKey<FormState>();
-  final navigatorKey = GlobalKey<NavigatorState>();
+  return Column(
+    children: [
+      Expanded(
+        child: SingleChildScrollView(
+          child: _form(context, formKey),
+        ),
+      ),
+      _buttons(context, formKey)
+    ],
+  );
+}
 
-  return SingleChildScrollView(
-    child: Form(
-      key: formKey,
-      // autovalidateMode: ,
-      //escribir la separacion de cada widget con un sizebox y
-      // el paddin para separar los espacios con el padding
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: TextFormField(
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Este campo es requerido';
-                }
-                return null;
-              },
-              textCapitalization: TextCapitalization.words,
-              decoration: const InputDecoration(
-                contentPadding: EdgeInsets.all(20),
-                enabledBorder: OutlineInputBorder(),
-                border: OutlineInputBorder(),
-                labelText: 'Nombre',
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                contentPadding: EdgeInsets.all(20),
-                enabledBorder: OutlineInputBorder(),
-                border: OutlineInputBorder(),
-                labelText: 'Hectáreas',
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                contentPadding: EdgeInsets.all(20),
-                enabledBorder: OutlineInputBorder(),
-                border: OutlineInputBorder(),
-                labelText: 'Cultivo',
-              ),
-            ),
-          ),
-          dropDownProduction(),
-          /*Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                contentPadding: EdgeInsets.all(20),
-                enabledBorder: OutlineInputBorder(),
-                border: OutlineInputBorder(),
-                labelText: 'Tipo de Producción',
-              ),
-            ),
-          ),*/
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: TextFormField(
-              decoration: const InputDecoration(
-                contentPadding: EdgeInsets.all(20),
-                enabledBorder: OutlineInputBorder(),
-                border: OutlineInputBorder(),
-                labelText: 'Tipo de Rodeo',
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+
+
+Widget _form(context, formKey) {
+    return Column(
+    children: [
+      Form(
+        key: formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
             children: [
-              Container(
-                margin: const EdgeInsets.only(right: 20, left: 20),
-                // width: screenSize.width/2.5,
-                width: 320,
-                height: 60,
-                child: ElevatedButton(
-                    onPressed: () {
-                      // Navigator.pushNamed(context, );
-                    },
-                    child: const Icon(
-                      Icons.cancel,
-                      size: 45,)),
-              ),
-              Container(
-                margin: const EdgeInsets.only(left: 20, right: 20),
-                // width: screenSize.width/2.5,
-                width: 320,
-                height: 60,
-                child: ElevatedButton(
-                    onPressed: () {
-                      if (formKey.currentState!.validate()) {
-                        scaffoldKey.currentState!.showSnackBar(
-                            const SnackBar(content: Text('Guardado'))
-                        );
-                      }
-                    },
-                    child: const Icon(
-                      Icons.save,
-                      size: 45,)
+              TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Este campo es requerido';
+                  }
+                  return null;
+                },
+                decoration: const InputDecoration(
+                  enabledBorder: OutlineInputBorder(),
+                  labelText: 'Nombre',
                 ),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              TextFormField(
+                decoration: const InputDecoration(
+                  enabledBorder: OutlineInputBorder(),
+                  labelText: 'Cultivo'
+                ),
+              ),const SizedBox(
+                height: 20,
+              ),
+              TextFormField(
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  enabledBorder: OutlineInputBorder(),
+                    labelText: 'Hectareas'
+                ),
+              ),const SizedBox(
+                height: 20,
               ),
             ],
           ),
-        ],
-      ),
+        ),
+      )
+    ],
+  );
+}
+
+
+Widget _buttons(context, formKey){
+
+  Color color = Colors.green;
+  Color colorIcon = Colors.white;
+  return Padding(
+    padding: const EdgeInsets.all(20),
+    child: Row(
+      children: [
+        Expanded(
+          child:
+          Container(
+            color: color,
+            child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MapScreen()),
+                  );
+                },
+                child: Icon(Icons.cancel,
+                  size: 45,
+                  color: colorIcon,)
+            ),
+          ),
+        ),
+        const SizedBox(
+          width: 20,
+        ),
+        Expanded(
+          child: Container(
+            color: color,
+            child: ElevatedButton(
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Guardado'))
+                    );
+                  }
+                },
+                child: Icon(Icons.save,
+                  size: 45,
+                  color: colorIcon,)
+            ),
+          ),
+        ),
+      ],
     ),
   );
 }
 
-Widget dropDownProduction(){
+
+Widget _dropDownProduction(){
   List<TypeProductionModel> items = [TypeProductionAgropecuaria('Agropecuaria'), TypeProductionPecuario('Pecuario'), TypeProductionAgricola('Agricola')];
   TypeProductionModel selectItem = items.first;
   void setState(Null Function() param0){};

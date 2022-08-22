@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'map_screen.dart';
+
 class LoadTrackScreen extends StatefulWidget{
   const LoadTrackScreen({Key ? key}) : super(key:key);
 
@@ -15,89 +17,115 @@ class LoadTrackScreen extends StatefulWidget{
         centerTitle: true,
         title: const Text('Camino'),
         ),
-      body: body(),
+      body: _body(context),
       );
   }
   }
 
+Widget _body(context){
+  final formKey = GlobalKey<FormState>();
+  return Column(
+    children: [
+      Expanded(
+        child: SingleChildScrollView(
+          child: _form(context, formKey),
+        ),
+      ),
+      _buttons(context, formKey)
+    ],
+  );
+}
 
-  Widget body() {
-    final formKey = GlobalKey<FormState>();
-    final scaffoldKey = GlobalKey<ScaffoldMessengerState>();
-    return SingleChildScrollView(
-      child: Form(
-          key: formKey,
+
+Widget _form(context, formKey) {
+  return Column(
+    children: [
+      Form(
+        key: formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: TextFormField(
-                  validator: (value){
-                    if (value == null || value.isEmpty){
-                      return 'Este campo es requerido';
-                    }
-                    return null;
-                  },
-                  textCapitalization: TextCapitalization.words,
-                  decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.all(20),
-                    enabledBorder: OutlineInputBorder(),
-                    border: OutlineInputBorder(),
-                    labelText: 'Nombre',
-                  ),
-                ),
-              ),Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: TextFormField(
-                  textCapitalization: TextCapitalization.words,
-                  decoration: const InputDecoration(
-                    contentPadding: EdgeInsets.all(20),
-                    enabledBorder: OutlineInputBorder(),
-                    border: OutlineInputBorder(),
-                    labelText: 'Descripcion',
-                  ),
+              TextFormField(
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Este campo es requerido';
+                  }
+                  return null;
+                },
+                decoration: const InputDecoration(
+                  enabledBorder: OutlineInputBorder(),
+                  labelText: 'Nombre',
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(right: 20, left: 20),
-                    width: 320,
-                    height: 60,
-                    child: ElevatedButton(
-                        onPressed: (){},
-                        child: const Icon(
-                          Icons.cancel,
-                          size: 45,)),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.only(left: 20, right: 20),
-                    width: 320,
-                    height: 60,
-                    child: ElevatedButton(
-                        onPressed: (){
-                          if (formKey.currentState!.validate()) {
-                            //En caso de no tener un BuildContext creo una variable
-                            //de tipo GlobalKey y le asigno GlobalKey<ScaffoldMessengerState>()
-                            scaffoldKey.currentState!.showSnackBar(
-                                const SnackBar(content: Text('Guardado'))
-                            );
-                          }
-                        },
-                        child: const Icon(
-                          Icons.save,
-                          size: 45,)
-                    ),
-                  ),
-                ],
+              TextFormField(
+                decoration: const InputDecoration(
+                    enabledBorder: OutlineInputBorder(),
+                    labelText: 'Descripcion'
+                ),
+              ),const SizedBox(
+                height: 20,
               ),
             ],
           ),
-      ),
-    );
-  }
+        ),
+      )
+    ],
+  );
+}
+
+
+Widget _buttons(context, formKey){
+
+  Color color = Colors.green;
+  Color colorIcon = Colors.white;
+  return Padding(
+    padding: const EdgeInsets.all(20),
+    child: Row(
+      children: [
+        Expanded(
+          child:
+          Container(
+            color: color,
+            child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MapScreen()),
+                  );
+                },
+                child: Icon(Icons.cancel,
+                  size: 45,
+                  color: colorIcon,)
+            ),
+          ),
+        ),
+        const SizedBox(
+          width: 20,
+        ),
+        Expanded(
+          child: Container(
+            color: color,
+            child: ElevatedButton(
+                onPressed: () {
+                  if (formKey.currentState!.validate()) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Guardado'))
+                    );
+                  }
+                },
+                child: Icon(Icons.save,
+                  size: 45,
+                  color: colorIcon,)
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+
