@@ -128,6 +128,13 @@
             </list>
           </value>
         </entry>
+        <entry key="mvc_pattern">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../PowerUp/Codes/src/flutter/.pub-cache/hosted/pub.dartlang.org/mvc_pattern-7.4.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="nested">
           <value>
             <list>
@@ -238,6 +245,7 @@
       <root url="file://$PROJECT_DIR$/../../PowerUp/Codes/src/flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.11/lib" />
       <root url="file://$PROJECT_DIR$/../../PowerUp/Codes/src/flutter/.pub-cache/hosted/pub.dartlang.org/material_color_utilities-0.1.4/lib" />
       <root url="file://$PROJECT_DIR$/../../PowerUp/Codes/src/flutter/.pub-cache/hosted/pub.dartlang.org/meta-1.7.0/lib" />
+      <root url="file://$PROJECT_DIR$/../../PowerUp/Codes/src/flutter/.pub-cache/hosted/pub.dartlang.org/mvc_pattern-7.4.0/lib" />
       <root url="file://$PROJECT_DIR$/../../PowerUp/Codes/src/flutter/.pub-cache/hosted/pub.dartlang.org/nested-1.0.0/lib" />
       <root url="file://$PROJECT_DIR$/../../PowerUp/Codes/src/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.8.1/lib" />
       <root url="file://$PROJECT_DIR$/../../PowerUp/Codes/src/flutter/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-2.1.2/lib" />
