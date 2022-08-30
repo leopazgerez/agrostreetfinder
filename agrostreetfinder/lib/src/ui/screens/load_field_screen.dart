@@ -14,7 +14,6 @@ class LoadFieldScreen extends StatefulWidget{
 }
 class _LoadFieldScreenState extends State<LoadFieldScreen>{
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,7 +147,8 @@ Widget _buttons(context, formKey){
 Widget _dropDownProduction(){
   List<TypeProductionModel> items = [TypeProductionAgropecuaria('Agropecuaria'), TypeProductionPecuario('Pecuario'), TypeProductionAgricola('Agricola')];
   TypeProductionModel selectItem = items.first;
-  void setState(Null Function() param0){};
+  void setState(VoidCallback fn) {
+  }
 
   return DropdownButton<TypeProductionModel>(
     value: selectItem,

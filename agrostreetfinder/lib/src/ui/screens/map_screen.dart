@@ -1,4 +1,4 @@
-import 'package:agrostreetfinder/src/ui/screencontrollers/expandable_fab_screen_controller.dart';
+import 'package:agrostreetfinder/src/ui/screencomponent/expandable_fab_screen_controller.dart';
 import 'package:agrostreetfinder/src/ui/screens/load_field_screen.dart';
 import 'package:agrostreetfinder/src/ui/screens/load_track_screen.dart';
 import 'package:flutter/material.dart';
