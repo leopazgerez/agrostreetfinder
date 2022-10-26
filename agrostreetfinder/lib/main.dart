@@ -1,4 +1,5 @@
-import 'package:agrostreetfinder/src/ui/screens/map_screen.dart';
+
+import 'package:agrostreetfinder/src/ui/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +18,7 @@ void main() {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: const MapScreen(),
+      home: const HomePage(),
     );
   }
 }

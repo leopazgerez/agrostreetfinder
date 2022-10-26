@@ -1,19 +1,19 @@
-import 'package:agrostreetfinder/src/models/type_production_agricola_model.dart';
-import 'package:agrostreetfinder/src/models/type_production_agropecuaria_model.dart';
-import 'package:agrostreetfinder/src/models/type_production_pecuario_model.dart';
-import 'package:agrostreetfinder/src/ui/screens/map_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
 
-import '../../models/type_production_model.dart';
+import '../pagecontrollers/load_track_page_controllers.dart';
+import 'home_page.dart';
 
-class LoadFieldScreen extends StatefulWidget{
-  const LoadFieldScreen({Key ? key}) : super(key:key);
+class LoadTrackPage extends StatefulWidget{
+  const LoadTrackPage({Key ? key}) : super(key:key);
 
   @override
-  State<LoadFieldScreen> createState() => _LoadFieldScreenState();
+  _LoadTrackPageState createState() => _LoadTrackPageState();
 }
-class _LoadFieldScreenState extends State<LoadFieldScreen>{
 
+class _LoadTrackPageState extends StateMVC<LoadTrackPage> {
+  final LoadTrackPageController _con = LoadTrackPageController.con;
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -21,15 +21,14 @@ class _LoadFieldScreenState extends State<LoadFieldScreen>{
       appBar: AppBar(
         //backgroundColor: ThemeData.from(colorScheme: colorScheme),
         centerTitle: true,
-        title: const Text('Campo'),
-      ),
-      body: _body(context),
-    );
+        title: const Text('Camino'),
+        ),
+      body: _body(context, _formKey),
+      );
   }
-}
+  }
 
-Widget _body(context){
-  final formKey = GlobalKey<FormState>();
+Widget _body(context, formKey){
   return Column(
     children: [
       Expanded(
@@ -43,9 +42,8 @@ Widget _body(context){
 }
 
 
-
 Widget _form(context, formKey) {
-    return Column(
+  return Column(
     children: [
       Form(
         key: formKey,
@@ -70,17 +68,8 @@ Widget _form(context, formKey) {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(),
-                  labelText: 'Cultivo'
-                ),
-              ),const SizedBox(
-                height: 20,
-              ),
-              TextFormField(
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(),
-                    labelText: 'Hectareas'
+                    enabledBorder: OutlineInputBorder(),
+                    labelText: 'Descripcion'
                 ),
               ),const SizedBox(
                 height: 20,
@@ -110,7 +99,7 @@ Widget _buttons(context, formKey){
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const MapScreen()),
+                    MaterialPageRoute(builder: (context) => const HomePage()),
                   );
                 },
                 child: Icon(Icons.cancel,
@@ -145,43 +134,3 @@ Widget _buttons(context, formKey){
 }
 
 
-Widget _dropDownProduction(){
-  List<TypeProductionModel> items = [TypeProductionAgropecuaria('Agropecuaria'), TypeProductionPecuario('Pecuario'), TypeProductionAgricola('Agricola')];
-  TypeProductionModel selectItem = items.first;
-  void setState(Null Function() param0){};
-
-  return DropdownButton<TypeProductionModel>(
-    value: selectItem,
-    icon: const Icon(Icons.arrow_downward),
-    elevation: 16,
-    style: const TextStyle(color: Colors.deepPurple),
-    underline: Container(
-      height: 2,
-      color: Colors.deepPurpleAccent,
-    ),
-    onChanged: (TypeProductionModel? newValue) {
-      setState(() {
-        selectItem = newValue!;
-      });
-    },
-    items: items
-        .map<DropdownMenuItem<TypeProductionModel>>((TypeProductionModel value) {
-      return DropdownMenuItem<TypeProductionModel>(
-        value: value,
-        child:  Text(value.name),
-      );
-    }).toList(),
-  );
-}
-
-
-
-
-
-
-// int id;
-
-// double? Hectareas;
-// String? typeProduction;
-// String? crop;
-// String? typeRodeo;

@@ -1,6 +1,5 @@
-import 'package:agrostreetfinder/src/models/lot_model.dart';
-import 'package:agrostreetfinder/src/ui/screencomponent/home_drawer.dart';
-import 'package:agrostreetfinder/src/ui/screens/load_field_screen.dart';
+
+import 'package:agrostreetfinder/src/ui/pages/load_field_page.dart';
 import 'package:flutter/material.dart';
 
 void main(){
@@ -23,7 +22,7 @@ class TestingScreens extends StatelessWidget{
           title: const Text('list'),
           centerTitle: true,
         ),
-        body: const LoadFieldScreen(),
+        body: const LoadFieldPage(),
         ),
     );
   }

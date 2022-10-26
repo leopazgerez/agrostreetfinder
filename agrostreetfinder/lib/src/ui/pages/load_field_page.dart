@@ -1,26 +1,36 @@
+import 'package:agrostreetfinder/src/models/type_production_agricola_model.dart';
+import 'package:agrostreetfinder/src/models/type_production_agropecuaria_model.dart';
+import 'package:agrostreetfinder/src/models/type_production_pecuario_model.dart';
 import 'package:flutter/material.dart';
+import 'package:mvc_pattern/mvc_pattern.dart';
 
-import 'map_screen.dart';
+import '../../models/type_production_model.dart';
+import '../pagecontrollers/load_field_page_controllers.dart';
+import 'home_page.dart';
 
-class LoadTrackScreen extends StatefulWidget{
-  const LoadTrackScreen({Key ? key}) : super(key:key);
+class LoadFieldPage extends StatefulWidget{
+  const LoadFieldPage({Key ? key}) : super(key:key);
 
   @override
-  State<LoadTrackScreen> createState() => _LoadTrackScreenState();
-  }
-  class _LoadTrackScreenState extends State<LoadTrackScreen>{
+  _LoadFieldPageState createState() => _LoadFieldPageState();
+}
+
+class _LoadFieldPageState extends StateMVC<LoadFieldPage> {
+  final _formKey = GlobalKey<FormState>();
+  final LoadFieldPageController _con = LoadFieldPageController.con;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         //backgroundColor: ThemeData.from(colorScheme: colorScheme),
         centerTitle: true,
-        title: const Text('Camino'),
-        ),
+        title: const Text('Campo'),
+      ),
       body: _body(context),
-      );
+    );
   }
-  }
+}
 
 Widget _body(context){
   final formKey = GlobalKey<FormState>();
@@ -37,8 +47,9 @@ Widget _body(context){
 }
 
 
+
 Widget _form(context, formKey) {
-  return Column(
+    return Column(
     children: [
       Form(
         key: formKey,
@@ -63,12 +74,22 @@ Widget _form(context, formKey) {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                    enabledBorder: OutlineInputBorder(),
-                    labelText: 'Descripcion'
+                  enabledBorder: OutlineInputBorder(),
+                  labelText: 'Cultivo'
                 ),
               ),const SizedBox(
                 height: 20,
               ),
+              TextFormField(
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(
+                  enabledBorder: OutlineInputBorder(),
+                    labelText: 'Hectareas'
+                ),
+              ),const SizedBox(
+                height: 20,
+              ),
+              _dropDownProduction(),
             ],
           ),
         ),
@@ -94,7 +115,7 @@ Widget _buttons(context, formKey){
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const MapScreen()),
+                    MaterialPageRoute(builder: (context) => const HomePage()),
                   );
                 },
                 child: Icon(Icons.cancel,
@@ -129,3 +150,43 @@ Widget _buttons(context, formKey){
 }
 
 
+Widget _dropDownProduction(){
+  List<TypeProductionModel> production = [TypeProductionAgropecuaria('Agropecuaria'), TypeProductionPecuario('Pecuario'), TypeProductionAgricola('Agricola')];
+  TypeProductionModel selectItem = production.first;
+  void setState(Null Function() param0){};
+
+  return DropdownButton<TypeProductionModel>(
+    value: selectItem,
+    icon: const Icon(Icons.arrow_downward),
+    elevation: 16,
+    style: const TextStyle(color: Colors.deepPurple),
+    underline: Container(
+      height: 2,
+      color: Colors.deepPurpleAccent,
+    ),
+    onChanged: (TypeProductionModel? newValue) {
+      setState(() {
+        selectItem = newValue!;
+      });
+    },
+    items: production
+        .map<DropdownMenuItem<TypeProductionModel>>((TypeProductionModel value) {
+      return DropdownMenuItem<TypeProductionModel>(
+        value: value,
+        child:  Text(value.name),
+      );
+    }).toList(),
+  );
+}
+
+
+
+
+
+
+// int id;
+
+// double? Hectareas;
+// String? typeProduction;
+// String? crop;
+// String? typeRodeo;
