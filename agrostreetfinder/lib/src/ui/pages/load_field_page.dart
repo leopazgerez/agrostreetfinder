@@ -18,7 +18,11 @@ class LoadFieldPage extends StatefulWidget{
 class _LoadFieldPageState extends StateMVC<LoadFieldPage> {
   final _formKey = GlobalKey<FormState>();
   final LoadFieldPageController _con = LoadFieldPageController.con;
-
+@override
+void setState(VoidCallback fn) {
+    // TODO: implement setState
+    super.setState(fn);
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,16 +84,23 @@ Widget _form(context, formKey) {
               ),const SizedBox(
                 height: 20,
               ),
-              TextFormField(
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  enabledBorder: OutlineInputBorder(),
-                    labelText: 'Hectareas'
-                ),
-              ),const SizedBox(
-                height: 20,
+              Row(
+                children: [
+                  Expanded(child: _dropDownProduction(),),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  Expanded(
+                    child: TextFormField(
+                      keyboardType: TextInputType.number,
+                      decoration: const InputDecoration(
+                        enabledBorder: OutlineInputBorder(),
+                          labelText: 'Hectareas'
+                      ),
+                    ),
+                  ),
+                ],
               ),
-              _dropDownProduction(),
             ],
           ),
         ),
@@ -153,40 +164,31 @@ Widget _buttons(context, formKey){
 Widget _dropDownProduction(){
   List<TypeProductionModel> production = [TypeProductionAgropecuaria('Agropecuaria'), TypeProductionPecuario('Pecuario'), TypeProductionAgricola('Agricola')];
   TypeProductionModel selectItem = production.first;
-  void setState(Null Function() param0){};
+  void setState(VoidCallback fn){}
 
-  return DropdownButton<TypeProductionModel>(
-    value: selectItem,
-    icon: const Icon(Icons.arrow_downward),
-    elevation: 16,
-    style: const TextStyle(color: Colors.deepPurple),
-    underline: Container(
-      height: 2,
-      color: Colors.deepPurpleAccent,
+  return Container(
+    height: 60,
+    decoration: BoxDecoration(border: Border.all(color: Colors.black), borderRadius: BorderRadius.circular(6)),
+    child: Center(
+      child: DropdownButton<TypeProductionModel>(
+        value: selectItem,
+        icon: const Icon(Icons.arrow_downward),
+        elevation: 16,
+        style: const TextStyle(color: Colors.black),
+        items: production
+            .map<DropdownMenuItem<TypeProductionModel>>((TypeProductionModel value) {
+          return DropdownMenuItem<TypeProductionModel>(
+            value: value,
+            child:  Text(value.name),
+          );
+        }).toList(),
+        onChanged: (TypeProductionModel? newValue) {
+          setState(() {
+            selectItem = newValue!;
+          });
+        },
+      ),
     ),
-    onChanged: (TypeProductionModel? newValue) {
-      setState(() {
-        selectItem = newValue!;
-      });
-    },
-    items: production
-        .map<DropdownMenuItem<TypeProductionModel>>((TypeProductionModel value) {
-      return DropdownMenuItem<TypeProductionModel>(
-        value: value,
-        child:  Text(value.name),
-      );
-    }).toList(),
   );
+
 }
-
-
-
-
-
-
-// int id;
-
-// double? Hectareas;
-// String? typeProduction;
-// String? crop;
-// String? typeRodeo;
