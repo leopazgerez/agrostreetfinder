@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 import '../pagecomponent/custom_expandable_button_page_component.dart';
 import '../pagecomponent/custom_tab_bar_page_component.dart';
+import '../pagecomponent/home_drawer.dart';
 import '../pagecontrollers/home_page_controllers.dart';
 import 'load_track_page.dart';
 
@@ -62,7 +63,8 @@ class _HomePageState extends StateMVC<HomePage> with TickerProviderStateMixin {
             ),
           ],
         ),
-        drawer: NavegationDrawer(
+        drawer: NavigationDrawer(
+          lot: _con.lot,
           onPressed: _closeDrawer,
         ));
   }
@@ -72,68 +74,15 @@ class _HomePageState extends StateMVC<HomePage> with TickerProviderStateMixin {
         physics: const NeverScrollableScrollPhysics(),
         controller: tabController,
         children: [
-          MapPageComponent(),
-          Text('Puta'),
-          Text('Que te'),
+          MapPageComponent(points: _con.points, lots: _con.lot,),
+          // Text('Rutas'),
+          Text('Rutas'),
+          Text('Favoritos'),
         ]);
   }
 }
 
-class NavegationDrawer extends StatelessWidget {
-  final VoidCallback? onPressed;
-  NavegationDrawer({Key? key, this.onPressed}) : super(key: key);
-  final HomePageController _con = HomePageController.con;
 
-  @override
-  Widget build(BuildContext context) {
-    return Drawer(
-      backgroundColor: Colors.green,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            AppBar(
-              centerTitle: true,
-              title: const Text('Menu'),
-              leading: IconButton(
-                  onPressed: onPressed,
-                  iconSize: 30,
-                  icon: const Icon(Icons.arrow_back_rounded)),
-            ),
-            buildHeader(context),
-            buildMenuItems(context),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget buildHeader(BuildContext context) => Container(
-        // MediaQuery es una clase que hace que el widget se adapte a al tamano de la pantalla
-        //hace que el widget sea responsivo. Esto significa que que el Widget se reconstruye
-        //en base al  tamano de pantalla del dispositivo en el que cual se esta ejecutando la app
-        padding: EdgeInsets.only(
-            //en este metodo lo que esta haciendo es adaptar la parte de arriba del contenedor
-            // en base a
-            top: MediaQuery.of(context).padding.top),
-      );
-
-  Widget buildMenuItems(BuildContext context) => SizedBox(
-      height: double.maxFinite,
-      width: 50,
-      child: ListView.builder(
-          itemCount: _con.fields.length,
-          itemBuilder: (BuildContext context, int index) {
-            return ListTile(
-                leading: const Icon(Icons.list),
-                trailing: const Text(
-                  "GFG",
-                  style: TextStyle(color: Colors.green, fontSize: 15),
-                ),
-                title: Text(_con.fields[index].crop.toString()));
-          }
-          )
-  );
   // Wrap(
   //   runSpacing: 10,
   //   children: [
@@ -148,4 +97,4 @@ class NavegationDrawer extends StatelessWidget {
   //     )
   //   ],
   // );
-}
+

@@ -3,21 +3,26 @@ import 'dart:async';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/material.dart';
 
+import '../../models/lot_model.dart';
+import '../../models/point_model.dart';
+
 class MapPageComponent extends StatefulWidget {
-  const MapPageComponent({Key? key}) : super(key: key);
+  final List<PointModel> points;
+  final List<LotModel> lots;
+  const MapPageComponent({Key? key, required this.points, required this.lots}) : super(key: key);
 
   @override
   State<MapPageComponent> createState() => _MapPageComponentState();
 }
 
 class _MapPageComponentState extends State<MapPageComponent> {
-  Completer<GoogleMapController> _controller = Completer();
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(19.0759837, 72.8776559),
+  Completer<GoogleMapController> controller = Completer();
+  static const CameraPosition _kGooglePlex = CameraPosition(
+    target: LatLng(-25.4401138, -63.8570852),
     zoom: 14.4746,
   );
   final Set<Marker> _markers = {};
-  final Set<Polyline> _polyline = {};
+  // final Set<Polyline> _polyline = {};
   List<LatLng> latLen = [
     LatLng(19.0759837, 72.8776559),
     LatLng(28.679079, 77.069710),
@@ -30,41 +35,30 @@ class _MapPageComponentState extends State<MapPageComponent> {
   void initState() {
     // TODO: implement initState
     super.initState();
-
-    // declared for loop for various locations
-    for(int i=0; i<latLen.length; i++){
+    for (int i = 0; i < widget.points.length; i++) {
       _markers.add(
-        // added markers
           Marker(
             markerId: MarkerId(i.toString()),
-            position: latLen[i],
-            infoWindow: InfoWindow(
-              title: 'HOTEL',
-              snippet: '5 Star Hotel',
-            ),
-            icon: BitmapDescriptor.defaultMarker,
-          )
-      );
-      setState(() {
-
-      });
-      _polyline.add(
-          Polyline(
-            polylineId: PolylineId('1'),
-            points: latLen,
-            color: Colors.green,
+            position: LatLng(
+                widget.points[i].latitude, widget.points[i].longitude),
+            icon: BitmapDescriptor.defaultMarkerWithHue(
+                BitmapDescriptor.hueRose),
+            infoWindow: InfoWindow(title: widget.lots[i].name),
+            onTap: (){}
           )
       );
     }
   }
 
+
   @override
   Widget build(BuildContext context) {
-    return GoogleMap(
-      markers: _markers,
-      // polylines: _polyline,
-      mapType: MapType.hybrid,
-      zoomControlsEnabled: false,
-        initialCameraPosition: _kGooglePlex);
+    return SizedBox(
+      child: GoogleMap(
+        markers: Set.from(_markers),
+        mapType: MapType.hybrid,
+        zoomControlsEnabled: false,
+          initialCameraPosition: _kGooglePlex),
+    );
   }
 }

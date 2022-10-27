@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:mvc_pattern/mvc_pattern.dart';
 
 import '../../models/field_model.dart';
+import '../../models/lot_model.dart';
+import '../../models/point_model.dart';
 import '../pages/load_field_page.dart';
 import '../pages/load_track_page.dart';
 
@@ -34,9 +36,13 @@ class HomePageController extends ControllerMVC {
     );
   }
   List<FieldModel> fields = [];
+  List<LotModel> lot = [];
+  List<PointModel> points = [];
 
   void initPage(){
     fields = dataManager.getFieldModel();
+    lot = dataManager.getLotModel();
+    points = dataManager.getPointModel();
   }
 }
 

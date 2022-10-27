@@ -4,6 +4,7 @@ import 'package:agrostreetfinder/src/data_access/dummy.dart';
 import '../interfaces/data_access.dart';
 import '../models/field_model.dart';
 import '../models/lot_model.dart';
+import '../models/point_model.dart';
 
 class DataManager {
   final IDataAccess dataAccess;
@@ -28,4 +29,13 @@ class DataManager {
   List<FieldModel> getFieldModel(){
     return dataAccess.getFieldModel();
   }
+
+  List<LotModel> getLotModel(){
+    return dataAccess.getLotModel();
+  }
+
+  List<PointModel> getPointModel(){
+    return dataAccess.getPointModel();
+  }
 }
+
