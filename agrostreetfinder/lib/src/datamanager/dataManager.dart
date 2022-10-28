@@ -1,6 +1,4 @@
-
 import 'package:agrostreetfinder/src/data_access/dummy.dart';
-
 import '../interfaces/data_access.dart';
 import '../models/field_model.dart';
 import '../models/lot_model.dart';
